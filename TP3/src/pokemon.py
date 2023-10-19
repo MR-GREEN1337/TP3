@@ -40,8 +40,8 @@ class Pokemon():
         self.pokemon = name
         self.base_url = base_url
 
-        url_pokemon = base_url + "pokemon/" + name
-        json_dump = requests.get(url_pokemon, stream=True)
+        self.url_pokemon = base_url + "pokemon/" + name
+        json_dump = requests.get(self.url_pokemon, stream=True)
         json_dump = json_dump.json()
         #Extract id
         self.id = json_dump["id"]
@@ -62,8 +62,12 @@ class Pokemon():
     # 2.3 : Faire la méthode get_color
     # ------------------------------------------------------------------------ #
     def get_color(self) -> None:
-        pass
-
+        json_dump = requests.get(self.url_pokemon, stream=True)
+        couleur_url_url = json_dump["species"]["url"]
+        couleur_url = requests.get(couleur_url_url).json()
+        couleur = couleur_url["color"]["name"]
+        self.color= couleur
+        print(f"Le pokémon {self.pokemon} est de couleur {self.color}")
     # ------------------------------------------------------------------------ #
     # 2.4 : Faire la méthode plot_sprite
     # ------------------------------------------------------------------------ #

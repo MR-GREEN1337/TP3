@@ -54,7 +54,6 @@ if __name__ == '__main__':
 
     # 1.4 : Aller chercher la couleur du pokémon
     couleur_url_url = json["species"]["url"]
-    print(couleur_url_url)
     couleur_url = requests.get(couleur_url_url).json()
     couleur = couleur_url["color"]["name"]
     print(f"Le pokémon {pokemon} est de couleur {couleur}")

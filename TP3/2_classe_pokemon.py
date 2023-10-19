@@ -26,8 +26,8 @@ if __name__ == "__main__":
 
 
     # # 2.3 : Affichage d'informations plus complexes :
-    # pokemon.get_color()
-    # print(f'Sa couleur est {pokemon.color}')
+    pokemon.get_color()
+    print(f'Sa couleur est {pokemon.color}')
 
     # # Appeler le prof (on demandera une requête plus compliquée)
 

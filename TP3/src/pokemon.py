@@ -13,6 +13,7 @@ Ce fichier contient la définition de la classe Pokemon
 
 import requests
 import random
+import json 
 
 from .classes_combat import Move
 from PIL import Image
@@ -36,14 +37,26 @@ class Pokemon():
         """
 
         #Collect data
-        pass
+        self.pokemon = name
+        self.base_url = base_url
+
+        url_pokemon = base_url + "pokemon/" + name
+        json_dump = requests.get(url_pokemon, stream=True)
+        json_dump = json_dump.json()
+        #Extract id
+        self.id = json_dump["id"]
+        #Extract height
+        self.height = json_dump["height"]
+        #Extract weight
+        self.weight = json_dump["weight"]
+
 
 
     # ------------------------------------------------------------------------ #
     # 2.2 : Faire la méthode __str__
     # ------------------------------------------------------------------------ #
     def __str__(self) -> str:
-        pass
+        return f"Name: {self.pokemon}\nWeight: {self.weight} kg\nHeight: {self.height} m"
 
     # ------------------------------------------------------------------------ #
     # 2.3 : Faire la méthode get_color

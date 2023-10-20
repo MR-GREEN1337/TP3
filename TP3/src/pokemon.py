@@ -35,6 +35,8 @@ class Pokemon():
         @input name :           Name of the pokemon to generate
         @input base_url :       URL where to find all data (not specific to the list of pokemons)
         """
+        # Initialize comparaison attribute
+        self.comparison_attribute = None
 
         #Collect data
         self.pokemon = name
@@ -50,6 +52,8 @@ class Pokemon():
         #Extract weight
         self.weight = json_dump["weight"]
 
+        #Call methods
+        self.get_color()
 
 
     # ------------------------------------------------------------------------ #
@@ -62,7 +66,7 @@ class Pokemon():
     # 2.3 : Faire la méthode get_color
     # ------------------------------------------------------------------------ #
     def get_color(self) -> None:
-        json_dump = requests.get(self.url_pokemon, stream=True)
+        json_dump = requests.get(self.url_pokemon, stream=True).json()
         couleur_url_url = json_dump["species"]["url"]
         couleur_url = requests.get(couleur_url_url).json()
         couleur = couleur_url["color"]["name"]
@@ -72,14 +76,27 @@ class Pokemon():
     # 2.4 : Faire la méthode plot_sprite
     # ------------------------------------------------------------------------ #
     def plot_sprite(self) -> None:
-        pass
+        json = requests.get(self.url_pokemon, stream=True).json()
+        image_url = json["sprites"]["front_default"] # <- récupérer ici l'url de l'image à partir du dictionnaire
+        response = requests.get(image_url, stream=True)
+        img = imread(BytesIO(response.content))
+        plt.figure()
+        plt.imshow(img, aspect='auto')
+        plt.xticks([], [])
+        plt.yticks([], [])
+        plt.show()
+
 
     # ------------------------------------------------------------------------ #
     # 2.5 : Faire les méthodes reset_comparison_attribute et 
     #       set_comparison_attribute
     # ------------------------------------------------------------------------ #
 
+    def set_comparaison_attribute(self, attribute):
+        self.comparison_attribute = attribute
 
+    def reset_comparaison_attribute(self):
+        self.comparison_attribute = None
 
     # A LAISSER, utile pour afficher le tableau de plusieurs pokémons
     def verify_attribute(self, attribute=None):
@@ -98,8 +115,50 @@ class Pokemon():
     # ------------------------------------------------------------------------ #
     # 2.6 : Faire les méthodes pour surcharger les comparaisons
     # ------------------------------------------------------------------------ #
+    def bigger_eq(self):
+        attribute = getattr(self, self.comparison_attribute)
+        if self.comparison_attribute is None:
+            raise AttributeError(
+                f"No comparison attribute set"
+            )
+        
+        return self.comparison_attribute >= attribute
+        
+    def bigger(self):
+        attribute = getattr(self, self.comparison_attribute)
+        if self.comparison_attribute is None:
+            raise AttributeError(
+                f"No comparison attribute set"
+            )
+        
+        return self.comparison_attribute > attribute
 
+    def less_eq(self):
+        attribute = getattr(self, self.comparison_attribute)
+        if self.comparison_attribute is None:
+            raise AttributeError(
+                f"No comparison attribute set"
+            )
+        
+        return self.comparison_attribute <= attribute
+    
+    def less(self, attribute):
+        attribute = getattr(self, self.comparison_attribute)
+        if self.comparison_attribute is None:
+            raise AttributeError(
+                f"No comparison attribute set"
+            )
+        
+        return self.comparison_attribute < attribute
 
+    def equal(self, attribute):
+        attribute = getattr(self, self.comparison_attribute)
+        if self.comparison_attribute is None:
+            raise AttributeError(
+                f"No comparison attribute set"
+            )
+        
+        print(self.comparison_attribute == attribute)
 
 
     # ------------------------------------------------------------------------ #

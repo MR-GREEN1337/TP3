@@ -4,7 +4,7 @@ Created Date: Thu Sep 22 2022
 Author: Ammar Mian
 -----
 Last Modified: Fri Sep 23 2022
-Modified By: Ammar Mian
+Modified By: Ammar MBian
 -----
 Copyright (c) 2022 Université Savoie Mont-Blanc
 -----

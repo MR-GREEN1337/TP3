@@ -21,24 +21,25 @@ if __name__ == "__main__":
     pokemon = Pokemon(pokemon_name)
 
     # 2.2 : Afficher les informations avec print
-    print(f'Les informations sur {pokemon_name} sont:')
-    print(pokemon)
+    #print(f'Les informations sur {pokemon_name} sont:')
+    #print(pokemon)
 
 
     # # 2.3 : Affichage d'informations plus complexes :
-    pokemon.get_color()
-    print(f'Sa couleur est {pokemon.color}')
+    #pokemon.get_color()
+    #print(f'Sa couleur est {pokemon.color}')
 
     # # Appeler le prof (on demandera une requête plus compliquée)
 
     # # 2.4 : Affichage de l'image du pokémon
-    # print("Affichage du sprite :")
-    # pokemon.plot_sprite()
+    print("Affichage du sprite :")
+    pokemon.plot_sprite()
 
     # ------------------------------------------------------------------------------------------------------------------------- #
     # 2.6 : Surcharge des opérateurs : Tester ici des comparaisons entre pokémons sur des attributs différents.
     # ------------------------------------------------------------------------------------------------------------------------- #
-
+    pokemon.comparison_attribute = "weight"
+    #pokemon.less_eq()
     # ------------------------------------------------------------------------------------------------------------------------- #
     # /\ Appeler le prof pour valider une fois que ça marche. On vous demandera alors de faire une comparaison en plus.
     # ------------------------------------------------------------------------------------------------------------------------- #

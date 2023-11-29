@@ -69,10 +69,10 @@ if __name__ == "__main__":
     # # 3.4 : Tris simples.
     # # ------------------------------------------------------------------------------------------------------------------------- #
     # # Tri simple ascendant
-    # print("Liste triee par nom ascendant :")
-    # liste_triee_nom = Tri("name", "ascendant").run(list_pokemon)
-    # print_liste_pandas(liste_triee_nom, liste_attributs=["id", "name", "height", "weight", "color"])
-    # print("\n\n\n")
+    #print("Liste triee par nom ascendant :")
+    #liste_triee_nom = Tri("pokemon", "ascendant").run(list_pokemon)
+    #print_liste_pandas(liste_triee_nom, liste_attributs=["id", "pokemon", "height", "weight", "color"])
+    #print("\n\n\n")
 
     # # Tri simple descendant
     # print("Liste triee par taille descendant :")
@@ -88,10 +88,10 @@ if __name__ == "__main__":
     # # ------------------------------------------------------------------------------------------------------------------------- #
     # #  3.5 : Tri complexes : À FAIRE SI VOUS ÊTES EN AVANCE.
     # # ------------------------------------------------------------------------------------------------------------------------- #
-    # print("Liste triee par taille déscendant et poids ascendant")
-    # TriTaillePoids = CompositionTri([Tri("height", "descendant"), Tri("weight", "ascendant")])
-    # print_liste_pandas(TriTaillePoids.run(list_pokemon), liste_attributs=["id", "name", "height", "weight", "color"])
-    # print("\n\n\n")
+    print("Liste triee par taille déscendant et poids ascendant")
+    TriTaillePoids = CompositionTri([Tri("height", "descendant"), Tri("weight", "ascendant")])
+    print_liste_pandas(TriTaillePoids.run(list_pokemon), liste_attributs=["id", "pokemon", "height", "weight", "color"])
+    print("\n\n\n")
 
     # print("Liste triee par taille déscendant, poids ascendant et coleur ascendant")
     # TriTaillePoidsId = CompositionTri([Tri("height", "descendant"),

@@ -100,7 +100,7 @@ class Pokemon():
 
     # Surcharge des opérateurs ==
     def __eq__(self, other):
-        if self.comparison_attribute == None:
+        if self.comparison_attribute is None:
             raise AttributeError(
                 "comparaison attribute does not exist !"
             )
@@ -108,7 +108,7 @@ class Pokemon():
     
     # Surcharge des opérateurs >
     def __gt__(self, other):
-        if self.comparison_attribute == None:
+        if self.comparison_attribute is None:
             raise AttributeError(
                 "comparaison attribute does not exist !"
             )

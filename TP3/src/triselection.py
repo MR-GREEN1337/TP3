@@ -13,8 +13,7 @@ et à la sélection
 '''
 
 import pandas as pd
-from pokemon import Pokemon
-
+#import Pokemon
 def print_liste(liste_pokemons):
     """Fonction qui affiche les noms des pokemons dans une liste de pokémons
 
@@ -70,56 +69,61 @@ def tri_bulle(tab) -> list:
     list
         liste triée
     """
-    for i in [*range(1, len(tab))].reverse():
+    for i in range(len(tab)-1, -1, -1):
         for j in range(i):
             if tab[j+1] < tab[j]:
                 temp = tab[j]
                 tab[j] = tab[j+1]
                 tab[j+1] = temp
+    return tab
 
 # ------------------------------------------------------------------------ #
 # 3.3 : Réaliser la classe Tri
 # ------------------------------------------------------------------------ #
 class Tri():
-    super(Pokemon).__init__()
-
-    def __init__(self):
-        self.attribut = None
-        self.type = None
-        self.tri = None
+    
+    def __init__(self, attribut, type1):
+        self.attribut = attribut
+        self.type1 = type1
+        self.tri = []
 
     def set_attribute(self, attribut):
         self.attribut = attribut
 
-    def set_type(self, type: str):
-        self.type = type
+    def set_type(self, type1: str):
+        self.type1 = type1
     # ------------------------------------------------------------------------ #
     # 3.4 : Réaliser la méthode run
     # ------------------------------------------------------------------------ #
     def run(self, list_pokemon) -> list:
-        tri_bulle([pokemon.set_comparaison_attribute(self.attribut) for pokemon in list_pokemon])
+        for pokemon in list_pokemon:
+            pokemon.set_comparaison_attribute(self.attribut)
+        if self.type1 == "descendant":
+            return tri_bulle(list_pokemon).reverse()
+        return tri_bulle(list_pokemon)
 
 # ------------------------------------------------------------------------ #
 # 3.5 : Réaliser la classe CompositionTri avec la méthode run
 # ------------------------------------------------------------------------ #
 class CompositionTri():
-    """Classe permettant de faire une composition de plusieurs Tris.
-    """
-    pass
+    def __init__(self, liste_objets: list[Tri]):
+        self.liste_objets = liste_objets
+
+    def run(self, list_pokemon) -> list:
+        liste_triee = list_pokemon
+        for objet in self.liste_objets:
+            liste_triee = objet.run(liste_triee)
 
 # ------------------------------------------------------------------------ #
 # 3.6 : Réaliser la classe Selection
 # ------------------------------------------------------------------------ #
 class Selection():
-    """Classe implémentant un critère de sélection sur une liste de pokémons.
-    """
-    pass
+    def __init__(self, critere):
+        self.critere = critere
 
-    # ------------------------------------------------------------------------ #
-    # 3.7 : Réaliser la méthode run
-    # ------------------------------------------------------------------------ #
-    def run(self, list_pokemon) -> list:
-        pass
+    def run(self, liste_pokemon) -> list:
+        return [pokemon for pokemon in liste_pokemon if self.critere(pokemon)]
+
 
 # ------------------------------------------------------------------------ #
 # 3.5 : Réaliser la classe CompositionTriSelection avec la méthode run

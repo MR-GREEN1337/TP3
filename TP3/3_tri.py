@@ -27,7 +27,7 @@ def check_pickle(path:str, pokemon_names:list):
 
     with open(path, "rb") as f:
         data = pickle.load(f)
-        liste_pokemon_names = [pokemon.name for pokemon in data]
+        liste_pokemon_names = [pokemon.pokemon for pokemon in data]
         if liste_pokemon_names == pokemon_names:
             return True, data
 
@@ -62,7 +62,7 @@ if __name__ == "__main__":
 
     # Affichage de la liste sans tri
     print("Liste de base :")
-    print_liste_pandas(list_pokemon, liste_attributs=["id", "name", "height", "weight", "color"])
+    print_liste_pandas(list_pokemon, liste_attributs=["id", "pokemon", "height", "weight", "color"])
     print("\n\n\n")
 
     # # ------------------------------------------------------------------------------------------------------------------------- #

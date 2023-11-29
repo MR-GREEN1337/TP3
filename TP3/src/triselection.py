@@ -13,6 +13,7 @@ et à la sélection
 '''
 
 import pandas as pd
+from pokemon import Pokemon
 
 def print_liste(liste_pokemons):
     """Fonction qui affiche les noms des pokemons dans une liste de pokémons
@@ -69,21 +70,34 @@ def tri_bulle(tab) -> list:
     list
         liste triée
     """
-    pass
+    for i in [*range(1, len(tab))].reverse():
+        for j in range(i):
+            if tab[j+1] < tab[j]:
+                temp = tab[j]
+                tab[j] = tab[j+1]
+                tab[j+1] = temp
 
 # ------------------------------------------------------------------------ #
 # 3.3 : Réaliser la classe Tri
 # ------------------------------------------------------------------------ #
 class Tri():
-    """Classe implémentant un tri sur attribut de Pokémons
-    """
-    pass
+    super(Pokemon).__init__()
 
+    def __init__(self):
+        self.attribut = None
+        self.type = None
+        self.tri = None
+
+    def set_attribute(self, attribut):
+        self.attribut = attribut
+
+    def set_type(self, type: str):
+        self.type = type
     # ------------------------------------------------------------------------ #
     # 3.4 : Réaliser la méthode run
     # ------------------------------------------------------------------------ #
     def run(self, list_pokemon) -> list:
-        pass
+        tri_bulle([pokemon.set_comparaison_attribute(self.attribut) for pokemon in list_pokemon])
 
 # ------------------------------------------------------------------------ #
 # 3.5 : Réaliser la classe CompositionTri avec la méthode run

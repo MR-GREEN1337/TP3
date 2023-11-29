@@ -98,6 +98,48 @@ class Pokemon():
     def reset_comparaison_attribute(self):
         self.comparison_attribute = None
 
+    # Surcharge des opérateurs ==
+    def __eq__(self, other):
+        if self.comparison_attribute == None:
+            raise AttributeError(
+                "comparaison attribute does not exist !"
+            )
+        return getattr(self, self.comparison_attribute) == other
+    
+    # Surcharge des opérateurs >
+    def __gt__(self, other):
+        if self.comparison_attribute == None:
+            raise AttributeError(
+                "comparaison attribute does not exist !"
+            )
+        return getattr(self, self.comparison_attribute) > other
+
+    # Surcharge des opérateurs <
+    def __lt__(self, other):
+        if self.comparison_attribute is None:
+            raise AttributeError(
+                "comparaison attribute does not exist ! "
+        )
+        return getattr(self, self.comparison_attribute) < other
+
+    # Surcharge des opérateurs >=
+    def __ge__(self, other):
+        if self.comparison_attribute is None:
+            raise AttributeError(
+                "comparaison attribute does not exist !"
+            )
+#        return getattr(self, self.comparison_attribute) >= other
+        return getattr(self, self.comparison_attribute) >= other
+
+    # Surcharge des opérateurs <=
+    def __le__(self, other):
+        if self.comparison_attribute is None:
+            raise AttributeError(
+                "comparaison attribute does not exist !"
+            )
+        return getattr(self, self.comparison_attribute) <= other
+
+
     # A LAISSER, utile pour afficher le tableau de plusieurs pokémons
     def verify_attribute(self, attribute=None):
         if attribute == None:
@@ -115,51 +157,6 @@ class Pokemon():
     # ------------------------------------------------------------------------ #
     # 2.6 : Faire les méthodes pour surcharger les comparaisons
     # ------------------------------------------------------------------------ #
-    def bigger_eq(self):
-        attribute = getattr(self, self.comparison_attribute)
-        if self.comparison_attribute is None:
-            raise AttributeError(
-                f"No comparison attribute set"
-            )
-        
-        return self.comparison_attribute >= attribute
-        
-    def bigger(self):
-        attribute = getattr(self, self.comparison_attribute)
-        if self.comparison_attribute is None:
-            raise AttributeError(
-                f"No comparison attribute set"
-            )
-        
-        return self.comparison_attribute > attribute
-
-    def less_eq(self):
-        attribute = getattr(self, self.comparison_attribute)
-        if self.comparison_attribute is None:
-            raise AttributeError(
-                f"No comparison attribute set"
-            )
-        
-        return self.comparison_attribute <= attribute
-    
-    def less(self, attribute):
-        attribute = getattr(self, self.comparison_attribute)
-        if self.comparison_attribute is None:
-            raise AttributeError(
-                f"No comparison attribute set"
-            )
-        
-        return self.comparison_attribute < attribute
-
-    def equal(self, attribute):
-        attribute = getattr(self, self.comparison_attribute)
-        if self.comparison_attribute is None:
-            raise AttributeError(
-                f"No comparison attribute set"
-            )
-        
-        print(self.comparison_attribute == attribute)
-
 
     # ------------------------------------------------------------------------ #
     # 4.3 : Infos nécéssaires pour les combats

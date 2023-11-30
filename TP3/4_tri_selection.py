@@ -66,7 +66,7 @@ if __name__ == "__main__":
     # ------------------------------------------------------------------------------------------------------------------------- #
     # 3.7 : Crière de sélection simple sur la taille.
     # ------------------------------------------------------------------------------------------------------------------------- #
-    def critere_taille(pokemon):
+    def critere_taille(pokemon) -> bool:
         return pokemon.height > 9
     selection = Selection(critere_taille)
     liste_filtree = selection.run(list_pokemon)

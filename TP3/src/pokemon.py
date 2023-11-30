@@ -52,6 +52,12 @@ class Pokemon():
         #Extract weight
         self.weight = json_dump["weight"]
 
+        self.health = 0
+        self.defense= 0
+        self.attack= 0
+
+        self.healthPoints = 0
+
         #Call methods
         self.get_color()
 
@@ -162,35 +168,44 @@ class Pokemon():
     # 4.3 : Infos nécéssaires pour les combats
     # ------------------------------------------------------------------------ #
     def get_stats(self) -> None:
-        """
-        Collect stats usefull for the fight
-        """
+        url = f'https://pokeapi.co/api/v2/pokemon/{self.pokemon}'
+        response = requests.get(url)
+        data = response.json()
 
-        pass
-
+        self.health = data['stats'][0]['base_stat']
+        self.attack = data['stats'][1]['base_stat'] 
+        self.defense = data['stats'][2]['base_stat'] 
     # ------------------------------------------------------------------------ #
     # 4.6 : Afficher la santé
     # ------------------------------------------------------------------------ #
     def choose_moves(self) -> None:
-        """
-        Select the 4 moves which the pokemon can use in battle
-        """
-        pass
-    
+        url = f'https://pokeapi.co/api/v2/pokemon/{self.pokemon}'
+        response = requests.get(url)
+        data = response.json()
+
+        move_list = data.get('moves', [])
+        for move_data in move_list:
+            move_url = move_list['move']['url']
+            move = Move(move_url)
+            move_list.append(move)
+
+        move_final = []
+        for _ in range(4):
+            j = random.randint(0, len(move_list))
+            move_final.append(move_list[j])
+
+        self.available_moves = move_final
     # ------------------------------------------------------------------------ #
     # 4.4 : Afficher la santé et la perdre au besoin
     # ------------------------------------------------------------------------ #
     def display_health(self):
-        """
-        Used to display the actual health level of the pokemon
-        """
-        pass
+        print("||" + "#"*self.healthPoints%10)
     
     def get_HP(self):
         pass
     
     def take_damage(self, HP):
-        pass
+        self.health -= HP
 
     def get_def(self):
         pass
@@ -201,6 +216,10 @@ class Pokemon():
 
         @return :   Attacking power : move power * pokemon attack
         """
-        #Move selection
-        pass
+        move = random.choice(self.available_moves)
+        move_power = move.get_power()
+
+        attacking_power = self.attack * move_power
+
+        return attacking_power
 

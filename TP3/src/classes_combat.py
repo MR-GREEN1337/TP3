@@ -24,22 +24,30 @@ class Move():
         Initialization function
         @input url : url of the move
         """
-        pass
+        response = requests.get(url)
+        data = response.json()
+
+        self.name = data.get('name', 'Unknown Move')
+        self.power = data.get('power', 0)
     
     def getPower(self) -> int:
-        pass
+        return self.power
     
     def __str__(self) -> str:
-        pass
+        return f"Move: {self.name}, Power: {self.power}"
 
     def __eq__(self, moveB : object) -> bool:
         """
         Test the equality with another class Move
         """
-        pass
+        if isinstance(moveB, Move):
+            return self.name == moveB.name and self.power == moveB.power
+        return False
     
     def __eq__(self, moveB : str) -> bool:
         """
         Test the equality only with the name of the move
         """
-        pass
+        if isinstance(moveB, str):
+            return self.name == moveB
+        return False
